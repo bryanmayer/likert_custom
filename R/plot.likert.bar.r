@@ -138,13 +138,14 @@ likert.bar.plot <- function(likert,
 						 aes(fill=variable), stat='identity') + 
 				geom_bar(data=results.high, aes(fill=variable), stat='identity')
 			names(cols) <- levels(results$variable)
-			p <- p + scale_fill_manual(legend, breaks=names(cols), values=cols)
+			p <- p + scale_fill_manual(legend, breaks=names(cols), values=cols, limits = names(cols))
 		} else {
 			ymin <- 0
 			p <- ggplot(results, aes(y=value, x=Group, group=variable))
 			p <- p + geom_bar(stat='identity', aes(fill=variable)) +
 				scale_fill_manual(legend, 
-							values=cols, 
+							values=cols,
+                                                        limits = levels(results$variable),
 							breaks=levels(results$variable),
 							labels=levels(results$variable))
 		}
@@ -236,11 +237,11 @@ likert.bar.plot <- function(likert,
 						 aes(fill=variable), stat='identity') + 
 				geom_bar(data=results.high, aes(fill=variable), stat='identity')
 			names(cols) <- levels(results$variable)
-			p <- p + scale_fill_manual(legend, breaks=names(cols), values=cols)
+			p <- p + scale_fill_manual(legend, breaks=names(cols), values=cols, limits = names(cols))
 		} else {
 			p <- ggplot(results, aes(y=value, x=Item, group=Item))
 			p <- p + geom_bar(stat='identity', aes(fill=variable))
-			p <- p + scale_fill_manual(legend, values=cols, 
+			p <- p + scale_fill_manual(legend, values=cols, limits = levels(results$variable), 
 							  breaks=levels(results$variable), 
 							  labels=levels(results$variable))
 		}
